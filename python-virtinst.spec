@@ -1,7 +1,7 @@
 # -*- rpm-spec -*-
 
 %define _version 0.600.0
-%define _release 24
+%define _release 29
 
 %define with_rhel6_defaults 1
 %define with_selinux 1
@@ -122,6 +122,12 @@ Patch69: %{appname}-virtinst-add-support-for-panic-notifier-device.patch
 Patch70: %{appname}-virt-install-add-support-for-panic-option.patch
 Patch71: %{appname}-osdict-enable-RHEL-7.patch
 Patch72: %{appname}-osdict-replace-and-with-or.patch
+Patch73: %{appname}-when-cpu-host-is-specified-use-cpu-mode-host-model.patch
+Patch74: %{appname}-virt-install-do-not-fail-when-using-a-non-sparse-log.patch
+Patch75: %{appname}-interface-use-only-the-name-of-the-interface-when-de.patch
+Patch76: %{appname}-virt-install-fix-error-with-non-lvm-volumes.patch
+Patch77: %{appname}-Update-all-translations-according-to-zanata-translat.patch
+Patch78: %{appname}-translation-fix-wrong-usage-of-_-function.patch
 
 License: GPLv2+
 Group: Development/Libraries
@@ -223,6 +229,12 @@ and install new VMs) and virt-clone (clone an existing virtual machine).
 %patch70 -p1
 %patch71 -p1
 %patch72 -p1
+%patch73 -p1
+%patch74 -p1
+%patch75 -p1
+%patch76 -p1
+%patch77 -p1
+%patch78 -p1
 
 %build
 %if %{with_rhel6_defaults}
@@ -268,6 +280,25 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/virt-convert
 
 %changelog
+* Tue Jun 02 2015 Pavel Hrdina <phrdina@redhat.com> - 0.600.0-29
+- translation: fix wrong usage of _() function (rhbz#1223651)
+
+* Fri May 29 2015 Pavel Hrdina <phrdina@redhat.com> - 0.600.0-28
+- Update all translations according to zanata translations (rhbz#1223651)
+
+* Wed Mar 04 2015 Giuseppe Scrivano <gscrivan@redhat.com> - 0.600.0-27
+- Do not fail on non-lvm volumes (rhbz#1198517)
+
+* Thu Feb 26 2015 Giuseppe Scrivano <gscrivan@redhat.com> - 0.600.0-26
+- When --cpu-host is specified use cpu-mode host-model (rhbz#1167072)
+- Do not fail when using a non sparse logical volume (rhbz#1167998)
+- Fix bridge interface creation (rhbz#1172407)
+
+* Thu Feb 26 2015 Giuseppe Scrivano <gscrivan@redhat.com> - 0.600.0-25
+- When --cpu-host is specified use cpu-mode host-model (rhbz#1167072)
+- Do not fail when using a non sparse logical volume (rhbz#1167998)
+- Fix bridge interface creation (rhbz#1172407)
+
 * Fri May 30 2014 Giuseppe Scrivano <gscrivan@redhat.com> - 0.600.0-24
 - Mark RHEL7 as supported (rhbz#1102345)
 
