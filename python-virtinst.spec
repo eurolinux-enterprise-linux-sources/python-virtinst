@@ -1,7 +1,7 @@
 # -*- rpm-spec -*-
 
 %define _version 0.600.0
-%define _release 29
+%define _release 31
 
 %define with_rhel6_defaults 1
 %define with_selinux 1
@@ -128,6 +128,8 @@ Patch75: %{appname}-interface-use-only-the-name-of-the-interface-when-de.patch
 Patch76: %{appname}-virt-install-fix-error-with-non-lvm-volumes.patch
 Patch77: %{appname}-Update-all-translations-according-to-zanata-translat.patch
 Patch78: %{appname}-translation-fix-wrong-usage-of-_-function.patch
+Patch79: %{appname}-virtinst.Interface-fix-interface-creation-with-child.patch
+Patch80: %{appname}-virtinst.Interface-cleanup-interface-XML-to-be-usabl.patch
 
 License: GPLv2+
 Group: Development/Libraries
@@ -235,6 +237,8 @@ and install new VMs) and virt-clone (clone an existing virtual machine).
 %patch76 -p1
 %patch77 -p1
 %patch78 -p1
+%patch79 -p1
+%patch80 -p1
 
 %build
 %if %{with_rhel6_defaults}
@@ -280,6 +284,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/virt-convert
 
 %changelog
+* Mon Jan 09 2017 Pavel Hrdina <phrdina@redhat.com> - 0.600.0-31
+- virtinst.Interface: cleanup interface XML to be usable in bridge interface (rhbz#1408650)
+
+* Mon Oct 03 2016 Pavel Hrdina <phrdina@redhat.com> - 0.600.0-30
+- virtinst.Interface: fix interface creation with child interfaces (rhbz#1350683)
+
 * Tue Jun 02 2015 Pavel Hrdina <phrdina@redhat.com> - 0.600.0-29
 - translation: fix wrong usage of _() function (rhbz#1223651)
 
