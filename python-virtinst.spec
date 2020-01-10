@@ -1,7 +1,7 @@
 # -*- rpm-spec -*-
 
 %define _version 0.600.0
-%define _release 15
+%define _release 18
 
 %define with_rhel6_defaults 1
 %define with_selinux 1
@@ -79,6 +79,22 @@ Patch26: %{appname}-setup-rebuild-manpages-in-build-phase.patch
 Patch27: %{appname}-Remove-and-ignore-build-generated-files.patch
 Patch28: %{appname}-build-One-more-fix-for-clean-builds.patch
 Patch29: %{appname}-Update-pod-file-from-latest-pod.in.patch
+Patch30: %{appname}-details-Fix-changing-cirrus-QXL-for-active-VM-bz-928.patch
+Patch31: %{appname}-Support-incomplete-.treeinfo-files.patch
+Patch32: %{appname}-Don-t-support-sparse-logical-volumes.patch
+Patch33: %{appname}-Fix-progres-bar-output-bug-in-virt-clone.patch
+Patch34: %{appname}-Add-Debian-Wheezy-to-the-OS_TYPES.patch
+Patch35: %{appname}-add-mageia-to-the-list-of-supported-distribution.patch
+Patch36: %{appname}-osdict-Add-some-opensuse-entries.patch
+Patch37: %{appname}-osdict-Add-f17-tweak-some-supported-distros.patch
+Patch38: %{appname}-osdict-hmm-actually-add-f17.patch
+Patch39: %{appname}-virtinst-Add-latest-Ubuntu-releases.patch
+Patch40: %{appname}-osdict-Add-Fedora-18.patch
+Patch41: %{appname}-Don-t-support-comments-in-parsed-parameters.patch
+Patch42: %{appname}-Fix-progress-bars-in-virt-clone-once-more.patch
+Patch43: %{appname}-virtinst-throw-error-when-host-device-can-t-specify-.patch
+Patch44: %{appname}-virtinst-set-is_dup-to-true-when-host-device-come-wi.patch
+Patch45: %{appname}-addhardware-differentiate-duplicate-usb-devices-by-b.patch
 
 License: GPLv2+
 Group: Development/Libraries
@@ -137,6 +153,22 @@ and install new VMs) and virt-clone (clone an existing virtual machine).
 %patch27 -p1
 %patch28 -p1
 %patch29 -p1
+%patch30 -p1
+%patch31 -p1
+%patch32 -p1
+%patch33 -p1
+%patch34 -p1
+%patch35 -p1
+%patch36 -p1
+%patch37 -p1
+%patch38 -p1
+%patch39 -p1
+%patch40 -p1
+%patch41 -p1
+%patch42 -p1
+%patch43 -p1
+%patch44 -p1
+%patch45 -p1
 
 %build
 %if %{with_rhel6_defaults}
@@ -182,6 +214,29 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/virt-convert
 
 %changelog
+* Thu Aug 01 2013 Martin Kletzander <mkletzan@redhat.com> - 0.600.0-18
+- Don't support comments in parsed parameters (rhbz#916875)
+- Fix progress bars in virt-clone once more (rhbz#946972)
+- Throw error when --host-device can't specify unique device (rhbz#861972)
+- Set is_dup to true when --host-device come with bus.addr (rhbz#861972)
+- Differentiate duplicate usb devices by bus/addr (rhbz#861972)
+
+* Thu Jul 18 2013 Martin Kletzander <mkletzan@redhat.com> - 0.600.0-17
+- Fixed changelog entries
+
+* Thu Jul 18 2013 Martin Kletzander <mkletzan@redhat.com> - 0.600.0-16
+- Fix changing cirrus to QXL for active VM (rhbz#980334)
+- Support incomplete .treeinfo files (rhbz#954262)
+- Don't support sparse logical volumes (rhbz#921480)
+- Fix progress bar output bug in virt-clone (rhbz#946972)
+- Add Debian Wheezy to the OS_TYPES (rhbz#958496)
+- add mageia to the list of supported distribution (rhbz#958496)
+- osdict: Add some opensuse entries (rhbz#958496)
+- osdict: Add f17 tweak some supported distros (rhbz#958496)
+- osdict: hmm actually add f17 (rhbz#958496)
+- virtinst: Add latest Ubuntu releases (rhbz#958496)
+- osdict: Add Fedora 18 (rhbz#958496)
+
 * Tue Jan 08 2013 Jiri Denemark <jdenemar@redhat.com> - 0.600.0-15
 - build: One more fix for clean builds (rhbz#832339)
 - Update pod file from latest pod.in (rhbz#832339)
