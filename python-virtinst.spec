@@ -1,7 +1,7 @@
 # -*- rpm-spec -*-
 
 %define _version 0.600.0
-%define _release 18
+%define _release 24
 
 %define with_rhel6_defaults 1
 %define with_selinux 1
@@ -95,6 +95,33 @@ Patch42: %{appname}-Fix-progress-bars-in-virt-clone-once-more.patch
 Patch43: %{appname}-virtinst-throw-error-when-host-device-can-t-specify-.patch
 Patch44: %{appname}-virtinst-set-is_dup-to-true-when-host-device-come-wi.patch
 Patch45: %{appname}-addhardware-differentiate-duplicate-usb-devices-by-b.patch
+Patch46: %{appname}-doc-do-not-mention-state-on-off-for-features.patch
+Patch47: %{appname}-doc-state-correctly-the-number-of-possible-values-fo.patch
+Patch48: %{appname}-Fixed-a-small-typo-in-the-man-page.patch
+Patch49: %{appname}-LVM-Show-warning-when-allocation-0-and-allocation-ca.patch
+Patch50: %{appname}-osdict-append-and-later-to-the-last-version-of-an-OS.patch
+Patch51: %{appname}-support-mark-SPICE-as-supported-on-RHEL-6.patch
+Patch52: %{appname}-virt-image-remove-qcow-from-the-manual.patch
+Patch53: %{appname}-virt-install-Fix-disk-.sparse.patch
+Patch54: %{appname}-virt-install-force-call-to-_set_defaults-before-crea.patch
+Patch55: %{appname}-virt-install-Support-network-source-source_mode-targ.patch
+Patch56: %{appname}-Add-redirdev-device.patch
+Patch57: %{appname}-doc-remove-SDL-from-virt-install-documentation.patch
+Patch58: %{appname}-virtinst-expose-disk-source-startupPolicy-attribute.patch
+Patch59: %{appname}-virt-install-allow-to-specify-startupPolicy-for-disk.patch
+Patch60: %{appname}-virtinst-display-the-domain-for-PCI-devices.patch
+Patch61: %{appname}-Introduce-device-type-lun.patch
+Patch62: %{appname}-virtinst-virtualcontroller-support-attribute-model.patch
+Patch63: %{appname}-virtinst-storage-add-gluster-support.patch
+Patch64: %{appname}-support-correctly-check-the-SPICEVMC-support-on-RHEL.patch
+Patch65: %{appname}-enforce-non-sparse-logical-volumes-when-cloning.patch
+Patch66: %{appname}-doc-virt-install-add-lun-to-the-Disk-device-type-lis.patch
+Patch67: %{appname}-virt-image-hide-qcow-from-error-message.patch
+Patch68: %{appname}-virtinst-by-default-add-USB2-controllers.patch
+Patch69: %{appname}-virtinst-add-support-for-panic-notifier-device.patch
+Patch70: %{appname}-virt-install-add-support-for-panic-option.patch
+Patch71: %{appname}-osdict-enable-RHEL-7.patch
+Patch72: %{appname}-osdict-replace-and-with-or.patch
 
 License: GPLv2+
 Group: Development/Libraries
@@ -169,6 +196,33 @@ and install new VMs) and virt-clone (clone an existing virtual machine).
 %patch43 -p1
 %patch44 -p1
 %patch45 -p1
+%patch46 -p1
+%patch47 -p1
+%patch48 -p1
+%patch49 -p1
+%patch50 -p1
+%patch51 -p1
+%patch52 -p1
+%patch53 -p1
+%patch54 -p1
+%patch55 -p1
+%patch56 -p1
+%patch57 -p1
+%patch58 -p1
+%patch59 -p1
+%patch60 -p1
+%patch61 -p1
+%patch62 -p1
+%patch63 -p1
+%patch64 -p1
+%patch65 -p1
+%patch66 -p1
+%patch67 -p1
+%patch68 -p1
+%patch69 -p1
+%patch70 -p1
+%patch71 -p1
+%patch72 -p1
 
 %build
 %if %{with_rhel6_defaults}
@@ -214,6 +268,41 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/virt-convert
 
 %changelog
+* Fri May 30 2014 Giuseppe Scrivano <gscrivan@redhat.com> - 0.600.0-24
+- Mark RHEL7 as supported (rhbz#1102345)
+
+* Thu May 29 2014 Giuseppe Scrivano <gscrivan@redhat.com> - 0.600.0-23
+- virtinst: by default add USB2 controllers (rhbz#1001999)
+- pvpanic device support (rhbz#1101536)
+
+* Mon May 19 2014 Giuseppe Scrivano <gscrivan@redhat.com> - 0.600.0-22
+- virt-image: hide "qcow" from error message (rhbz#1095204)
+
+* Tue May 06 2014 Giuseppe Scrivano <gscrivan@redhat.com> - 0.600.0-21
+- Correctly check for the SPICEVMC support on RHEL (rhbz#853386)
+- Enforce non sparse logical volumes when cloning (rhbz#1055225)
+- doc: add "lun" to the Disk device type list for virt-install (rhbz#1077232)
+
+* Tue Apr 29 2014 Giuseppe Scrivano <gscrivan@redhat.com> - 0.600.0-20
+- storage: add gluster support (rhbz#1040172)
+
+* Tue Apr 29 2014 Giuseppe Scrivano <gscrivan@redhat.com> - 0.600.0-19
+- Document correctly the feature state attribute.  (rhbz#1024700)
+- Remove qcow from the virt-image 5 manual. (rhbz#1024180)
+- Fix typo in virt-install manual. (rhbz#1024151)
+- Update the os-variant list of virt-install. (rhbz#1011290)
+- Show an error when the allocation of new lvm volume set as 0 (rhbz#1000980)
+- virt-install honours sparse=false (rhbz#873545)
+- virt-install supports macvtap (rhbz#855740)
+- virt-install creates the spicevmc channel with "--graphics spice" (rhbz#853386)
+- fix cloning of LVM volumes (rhbz#1055225)
+- Graphics display type sdl removed from virt-install manual (rhbz#886779)
+- USB Redirection device options in virt-install (rhbz#1001999)
+- Specify 'startupPolicy' during virt-install (rhbz#1017423)
+- virt-manager displays domain for PCI device (rhbz#1085499)
+- Introduce device type 'lun' (rhbz#1077232)
+- Add Virtio SCSI disk option (rhbz#1049781)
+
 * Thu Aug 01 2013 Martin Kletzander <mkletzan@redhat.com> - 0.600.0-18
 - Don't support comments in parsed parameters (rhbz#916875)
 - Fix progress bars in virt-clone once more (rhbz#946972)
